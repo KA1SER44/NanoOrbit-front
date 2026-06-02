@@ -1,0 +1,3 @@
+# Copier vers deploy.config (non versionné) puis : npm run deploy
+DEPLOY_SSH=tlugagne@ssh-tlugagne.alwaysdata.net
+DEPLOY_DIR=www/nanoorbit-front

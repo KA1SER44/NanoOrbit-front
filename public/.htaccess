@@ -1,0 +1,9 @@
+# React Router (SPA) — Apache / alwaysdata
+# Si le site est dans un sous-dossier, adaptez RewriteBase (ex. /nanoorbit/)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
