@@ -22,7 +22,7 @@
 }
 
 .navbar .logo .icon {
-    background-image: url("../../public/NanoOrbit.svg");
+    background-image: url("/NanoOrbit.svg");
     background-repeat: no-repeat;
     background-size: contain;
     width: 40px;
