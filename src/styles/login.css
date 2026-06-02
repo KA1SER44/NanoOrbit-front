@@ -1,0 +1,73 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.login-card {
+  width: min(100%, 440px);
+  padding: var(--space-6) var(--space-7);
+}
+
+.login-card:hover {
+  transform: none;
+}
+
+.login-header {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  margin-bottom: var(--space-6);
+}
+
+.login-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-1);
+}
+
+.login-header p {
+  font-size: 0.88rem;
+}
+
+.login-logo {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.35));
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.login-submit {
+  width: 100%;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+}
+
+.login-error {
+  margin-bottom: 0;
+}
+
+.login-hint {
+  margin-top: var(--space-5);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.login-roles {
+  margin-top: var(--space-5);
+}
+
+.auth-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}

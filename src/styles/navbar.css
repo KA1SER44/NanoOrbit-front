@@ -155,6 +155,35 @@
     border-radius: 50px;
 }
 
+.navbar-session {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.navbar-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: transparent;
+  padding: 0;
+}
+
+.navbar-role {
+  font-size: 0.68rem;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.navbar-logout {
+  white-space: nowrap;
+}
+
 /* ── Fin de navbar ───────────────────────────── */
 .navbar-end {
   display: flex;
