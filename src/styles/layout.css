@@ -1,0 +1,129 @@
+/* ═══════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════ */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 60px; /* hauteur navbar */
+}
+
+/* ── Contenu principal ───────────────────────── */
+.layout-main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-7) var(--space-7);
+}
+
+@media (max-width: 1024px) {
+  .layout-main { padding: var(--space-6) var(--space-5); }
+}
+
+@media (max-width: 640px) {
+  .layout-main { padding: var(--space-5) var(--space-4); }
+}
+
+/* Largeur max pour le contenu */
+.layout-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Grid de contenu ─────────────────────────── */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.content-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.content-grid.cols-auto {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.col-span-2 { grid-column: span 2; }
+.col-span-full { grid-column: 1 / -1; }
+
+@media (max-width: 900px) {
+  .content-grid,
+  .content-grid.cols-3 { grid-template-columns: 1fr; }
+  .col-span-2 { grid-column: span 1; }
+}
+
+/* ── Section ─────────────────────────────────── */
+.section {
+  margin-bottom: var(--space-7);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.section-title h2 {
+  font-size: 1.1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ── Panel latéral optionnel ─────────────────── */
+.layout-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  padding: var(--space-5) var(--space-4);
+  border-right: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+  .layout-sidebar { display: none; }
+}
+
+/* ── Footer ──────────────────────────────────── */
+.layout-footer {
+  margin-top: var(--space-8);
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer-info {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ── Carte pleine page (loading, erreur) ─────── */
+.fullpage-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  gap: var(--space-4);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.fullpage-card .icon { font-size: 2.5rem; opacity: 0.4; }
