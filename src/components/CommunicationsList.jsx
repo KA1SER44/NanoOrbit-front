@@ -115,7 +115,7 @@ function ActiveHighlight({ satellite }) {
   );
 }
 
-export default function CommunicationsList() {
+export default function CommunicationsList({ refreshKey = 0 }) {
   const [items, setItems] = useState([]);
   const [activeSatellite, setActiveSatellite] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -151,38 +151,40 @@ export default function CommunicationsList() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [refreshKey]);
 
-  if (loading) {
-    return (
-      <div className="satShell commShell" role="region" aria-busy="true">
-        <p className="commState">Chargement du bilan communications…</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="satShell commShell" role="alert">
-        <p className="commState commStateError">{error}</p>
-      </div>
-    );
-  }
-
-  if (!items.length) {
-    return (
-      <div className="satShell commShell" role="region">
-        <p className="commState">Aucune communication enregistrée.</p>
-      </div>
-    );
-  }
-
-  return (
+  const listShell = (content) => (
     <div
       className="satShell commShell"
       role="region"
       aria-label="Bilan des communications par satellite"
     >
+      {content}
+    </div>
+  );
+
+  if (loading) {
+    return listShell(
+      <p className="commState">Chargement du bilan communications…</p>,
+    );
+  }
+
+  if (error) {
+    return listShell(
+      <p className="commState commStateError" role="alert">
+        {error}
+      </p>,
+    );
+  }
+
+  if (!items.length) {
+    return listShell(
+      <p className="commState">Aucune communication enregistrée.</p>,
+    );
+  }
+
+  return listShell(
+    <>
       <ActiveHighlight satellite={activeSatellite} />
 
       <div className="headerRow">
@@ -216,6 +218,6 @@ export default function CommunicationsList() {
           />
         );
       })}
-    </div>
+    </>,
   );
 }
