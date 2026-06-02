@@ -1,0 +1,288 @@
+.comHighlight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  margin-bottom: 12px;
+  background: rgba(55, 138, 221, 0.12);
+  border: 0.5px solid rgba(55, 138, 221, 0.35);
+  border-radius: 50px;
+}
+
+.comHighlightBadge {
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(55, 138, 221, 0.25);
+  color: #85b7eb;
+  border: 0.5px solid rgba(55, 138, 221, 0.45);
+  flex-shrink: 0;
+}
+
+.comHighlightText {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  min-width: 0;
+}
+
+.comHighlightText strong {
+  font-weight: 600;
+  color: #fff;
+}
+
+.comHighlightVol {
+  font-family: "Space Mono", monospace;
+  color: #85b7eb;
+  margin-left: auto;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.commRowActive {
+  background: rgba(55, 138, 221, 0.1);
+  border-color: rgba(55, 138, 221, 0.35);
+}
+
+.commRowActive:hover {
+  background: rgba(55, 138, 221, 0.14);
+}
+
+/* Grille alignée header / lignes (évite width:100px sur tous les enfants) */
+.commShell .headerRow,
+.commShell .commRow {
+  display: grid;
+  grid-template-columns:
+    36px
+    minmax(56px, 72px)
+    1px
+    minmax(80px, 1.2fr)
+    minmax(52px, 64px)
+    minmax(76px, 92px)
+    minmax(68px, 84px)
+    minmax(100px, 1.2fr)
+    minmax(76px, 88px);
+  gap: 10px 12px;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.commShell .headerRow {
+  justify-content: stretch;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.commShell .commRow {
+  justify-content: stretch;
+}
+
+.commShell .headerRow > *,
+.commShell .commRow > * {
+  width: auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.commShell .satIcon {
+  width: 36px;
+  justify-self: center;
+}
+
+.commShell .satId {
+  min-width: 0;
+}
+
+.commShell .divider {
+  width: 1px;
+  justify-self: center;
+}
+
+.commShell .satName {
+  min-width: 0;
+  text-align: center;
+  justify-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.commShell .hcellName {
+  text-align: center;
+}
+
+.commShell .hcellFen,
+.commShell .commFenBadge {
+  justify-self: center;
+  width: auto;
+  min-width: 52px;
+  max-width: 64px;
+}
+
+.commFenBadge {
+  font-family: "Space Mono", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: rgba(127, 119, 221, 0.22);
+  color: #afa9ec;
+  border: 0.5px solid rgba(127, 119, 221, 0.35);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+
+.commShell .hcellVol,
+.commShell .commVolCell,
+.commShell .hcellMoy,
+.commShell .commMoyCell {
+  justify-self: center;
+}
+
+.commVolCell strong,
+.commMoyCell strong {
+  font-family: "Space Mono", monospace;
+  font-size: 14px;
+}
+
+.commShell .satCell.w120 {
+  justify-self: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.commShell .satCell.w120 strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* —— Stations (contenu contenu dans la colonne grille) —— */
+.commShell .hcellStations,
+.commShell .commStationsCell {
+  justify-self: stretch;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.commStationsCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.commStationsPill {
+  font-family: "Space Mono", monospace;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  background: rgba(29, 158, 117, 0.18);
+  color: #5dcaa5;
+  border: 0.5px solid rgba(29, 158, 117, 0.3);
+  display: inline-block;
+  white-space: nowrap;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.commState {
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.commStateError {
+  color: #f09595;
+}
+
+/* Défilement horizontal sur petits écrans — colonne Fenêtres garde sa largeur */
+@media (max-width: 1100px) {
+  .commShell {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .commShell .headerRow,
+  .commShell .commRow {
+    min-width: 880px;
+  }
+
+  .commShell .hcellFen,
+  .commShell .commFenBadge {
+    min-width: 52px;
+    max-width: 64px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .comHighlight {
+    flex-wrap: wrap;
+    border-radius: 24px;
+    padding: 12px 16px;
+  }
+
+  .comHighlightVol {
+    margin-left: 0;
+    width: 100%;
+    text-align: right;
+  }
+
+  .commShell {
+    border-radius: 24px;
+    padding: 12px;
+  }
+
+  .commShell .headerRow,
+  .commShell .commRow {
+    min-width: 800px;
+    grid-template-columns:
+      32px
+      minmax(52px, 64px)
+      1px
+      minmax(72px, 1fr)
+      minmax(44px, 56px)
+      minmax(68px, 80px)
+      minmax(60px, 76px)
+      minmax(96px, 1.1fr)
+      minmax(64px, 76px);
+    gap: 8px 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .commShell .hcell {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .commShell .hcellFen {
+    min-width: 44px;
+    max-width: 56px;
+  }
+
+  .commFenBadge {
+    font-size: 12px;
+    padding: 3px 8px;
+    min-width: 40px;
+    max-width: 52px;
+  }
+
+  .commShell .satCell.w120 strong {
+    font-size: 14px;
+  }
+
+  .commStationsPill {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+}

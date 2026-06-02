@@ -1,3 +1,5 @@
+import CommunicationsList from "../components/CommunicationsList";
+
 export default function CommunicationsPage() {
-  return <h1>Communications</h1>;
+  return <CommunicationsList />;
 }
