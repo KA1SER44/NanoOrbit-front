@@ -1,3 +1,9 @@
+import MissionsList from "../components/MissionsList";
+
 export default function MissionsPage() {
-  return <h1>Missions</h1>;
+  return (
+    <div className="missionsPage">
+      <MissionsList />
+    </div>
+  );
 }

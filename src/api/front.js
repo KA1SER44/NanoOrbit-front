@@ -9,3 +9,8 @@ export async function fetchCommunications() {
   const { data } = await api.get("/api/communications");
   return data;
 }
+
+export async function fetchMissions() {
+  const { data } = await api.get("/api/missions");
+  return data;
+}
