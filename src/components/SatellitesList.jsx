@@ -1,23 +1,71 @@
+import { useEffect, useState } from "react";
+import { fetchSatellites } from "../api/front.js";
 import "../styles/satellitesList.css";
 
-const satellites = [
-  { id: "SAT-0041", name: "Astra Prime", format: "1U", launch: "12 jan 2022", orbit: "LEO", alt: "412 km", battery: 87 },
-  { id: "SAT-0078", name: "Helix-B3", format: "3U", launch: "05 avr 2023", orbit: "SSO", alt: "530 km", battery: 54 },
-  { id: "SAT-0112", name: "Orion Relay", format: "6U", launch: "19 oct 2021", orbit: "MEO", alt: "8 050 km", battery: 72 },
-  { id: "SAT-0155", name: "Kronos XI", format: "12U", launch: "30 jui 2020", orbit: "GEO", alt: "35 786 km", battery: 21 },
-  { id: "SAT-0190", name: "Vega Scout", format: "3U", launch: "08 fév 2024", orbit: "LEO", alt: "480 km", battery: 93 },
-  { id: "SAT-0203", name: "Nebula Core", format: "6U", launch: "22 sep 2022", orbit: "SSO", alt: "560 km", battery: 45 },
-  { id: "SAT-0247", name: "Apex Zero", format: "1U", launch: "14 mar 2023", orbit: "LEO", alt: "390 km", battery: 18 },
-  { id: "SAT-0289", name: "Titan Arc", format: "12U", launch: "03 nov 2019", orbit: "MEO", alt: "20 200 km", battery: 66 },
-];
+function pickField(row, key, fallback) {
+  if (row[key] != null && row[key] !== "") return row[key];
+  if (fallback) {
+    for (const alt of fallback) {
+      if (row[alt] != null && row[alt] !== "") return row[alt];
+    }
+  }
+  return null;
+}
 
-function getBatteryClass(pct) {
-  if (pct >= 70) return "batHigh";
-  if (pct >= 40) return "batMed";
+function formatLaunchDate(value) {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+function formatAltitude(value) {
+  if (value == null || value === "") return "—";
+  const num = Number(value);
+  if (Number.isNaN(num)) return String(value);
+  return `${num.toLocaleString("fr-FR")} km`;
+}
+
+function mapSatelliteRow(row) {
+  const battery = Number(
+    pickField(row, "capacite_batterie", ["capacite_batterie_wh"]),
+  );
+
+  return {
+    id: pickField(row, "id_satellite", ["id"]) ?? "—",
+    name: pickField(row, "nom_satellite", ["nom"]) ?? "—",
+    format: pickField(row, "format_cubesat", ["format"]) ?? "—",
+    launch: formatLaunchDate(
+      pickField(row, "date_lancement", ["date_lancement_satellite"]),
+    ),
+    orbit:
+      pickField(row, "type_orbite", ["type_orbite_satellite"]) ?? "—",
+    alt: formatAltitude(pickField(row, "altitude", ["altitude_km"])),
+    battery: Number.isNaN(battery) ? 0 : battery,
+  };
+}
+
+function getBatteryClass(wh) {
+  if (wh >= 80) return "batHigh";
+  if (wh >= 55) return "batMed";
   return "batLow";
 }
 
 function SatelliteRow({ id, name, format, launch, orbit, alt, battery }) {
+  const formatClass =
+    format && format !== "—"
+      ? `satFormatBadge fmt${format.replace("U", "u")}`
+      : "satFormatBadge";
+
+  const orbitClass =
+    orbit && orbit !== "—"
+      ? `orbitPill orbit${orbit.toLowerCase()}`
+      : "orbitPill";
+
   return (
     <div className="satRow">
       <div className="satIcon">
@@ -48,45 +96,96 @@ function SatelliteRow({ id, name, format, launch, orbit, alt, battery }) {
 
       <div className="satName">{name}</div>
 
-      <div className={`satFormatBadge fmt${format.replace("U", "u")}`}>
-        {format}
-      </div>
+      <div className={formatClass}>{format}</div>
 
       <div className="satCell w88">
         <strong>{launch}</strong>
       </div>
 
       <div className="satCell w72">
-        <span className={`orbitPill orbit${orbit.toLowerCase()}`}>
-          {orbit}
-        </span>
+        <span className={orbitClass}>{orbit}</span>
       </div>
 
       <div className="satCell w56">
         <strong>{alt}</strong>
       </div>
 
-      <div className={`batteryBar ${getBatteryClass(battery)}`}>
-        <div className="batteryTrack">
-          <div
-            className="batteryFill"
-            style={{ width: `${battery}%` }}
-          />
-        </div>
-
-        <span className="batteryPct">{battery}%</span>
+      <div className={`satCell satBatteryCell ${getBatteryClass(battery)}`}>
+        <strong>
+          {battery ? `${battery.toLocaleString("fr-FR")} Wh` : "—"}
+        </strong>
       </div>
     </div>
   );
 }
 
-export default function SatelliteList({ data = satellites }) {
-  return (
+export default function SatelliteList({ refreshKey = 0 }) {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      setLoading(true);
+      setError("");
+
+      try {
+        const data = await fetchSatellites();
+        if (cancelled) return;
+
+        const rows = Array.isArray(data) ? data : [];
+        setItems(rows.map(mapSatelliteRow));
+      } catch (err) {
+        if (cancelled) return;
+        const message =
+          err.response?.data?.error ??
+          "Impossible de charger les satellites opérationnels.";
+        setError(message);
+        setItems([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshKey]);
+
+  const listShell = (content) => (
     <div
-      className="satShell"
+      className="satShell satListShell"
       role="region"
       aria-label="Registre des satellites"
     >
+      {content}
+    </div>
+  );
+
+  if (loading) {
+    return listShell(
+      <p className="satState">Chargement des satellites opérationnels…</p>,
+    );
+  }
+
+  if (error) {
+    return listShell(
+      <p className="satState satStateError" role="alert">
+        {error}
+      </p>,
+    );
+  }
+
+  if (!items.length) {
+    return listShell(
+      <p className="satState">Aucun satellite opérationnel.</p>,
+    );
+  }
+
+  return listShell(
+    <>
       <div className="headerRow">
         <div className="hcellIcon" />
 
@@ -107,9 +206,9 @@ export default function SatelliteList({ data = satellites }) {
         <div className="hcell hcellBat">Batterie</div>
       </div>
 
-      {data.map((sat) => (
+      {items.map((sat) => (
         <SatelliteRow key={sat.id} {...sat} />
       ))}
-    </div>
+    </>,
   );
 }

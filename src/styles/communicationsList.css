@@ -87,6 +87,11 @@
   text-align: center;
 }
 
+.commShell .commRow * {
+  width: auto;
+  text-align: inherit;
+}
+
 .commShell .satIcon {
   width: 36px;
   justify-self: center;
@@ -203,19 +208,13 @@
   color: #f09595;
 }
 
+.commShell .headerRow,
+.commShell .commRow {
+  min-width: 880px;
+}
+
 /* Défilement horizontal sur petits écrans — colonne Fenêtres garde sa largeur */
 @media (max-width: 1100px) {
-  .commShell {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-
-  .commShell .headerRow,
-  .commShell .commRow {
-    min-width: 880px;
-  }
-
   .commShell .hcellFen,
   .commShell .commFenBadge {
     min-width: 52px;

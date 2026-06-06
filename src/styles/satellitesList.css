@@ -51,10 +51,6 @@
     cursor: default;
     justify-content: space-around;
 }
-.satRow * {
-    width: 100px;
-    text-align: center;
-}
 .satRow:last-child { margin-bottom: 0; }
 .satRow:hover {
   background: rgba(255, 255, 255, 0.08);
@@ -152,32 +148,181 @@
 .orbitsso { background: rgba( 55, 138, 221, 0.18); color: #85b7eb; border: 0.5px solid rgba( 55, 138, 221, 0.30); }
  
 /* ---------- Battery ---------- */
-.batteryBar {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  flex-shrink: 0;
-  min-width: 80px;
-}
-.batteryTrack {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.batteryFill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.4s ease;
-}
-.batHigh .batteryFill { background: #97c459; }
-.batHigh .batteryPct { color:#97c459; }
-.batMed .batteryFill { background: #ef9f27; }
-.batMed .batteryPct { color:#ef9f27; }
-.batLow .batteryFill { background: #e24b4a; }
-.batLow .batteryPct { color:#e24b4a; }
-.batteryPct {
+.satBatteryCell strong {
   font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+}
+
+.batHigh strong { color: #97c459; }
+.batMed strong { color: #ef9f27; }
+.batLow strong { color: #e24b4a; }
+
+.satState {
+  text-align: center;
+  padding: 48px 24px;
   font-size: 14px;
-  min-width: 30px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.satStateError {
+  color: #f09595;
+}
+
+.satPage {
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.satPage .satShell.satListShell {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Grille alignée header / lignes (même principe que commShell) */
+.satListShell .headerRow,
+.satListShell .satRow {
+  display: grid;
+  grid-template-columns:
+    36px
+    minmax(56px, 72px)
+    1px
+    minmax(80px, 1.2fr)
+    minmax(40px, 52px)
+    minmax(80px, 96px)
+    minmax(52px, 68px)
+    minmax(56px, 72px)
+    minmax(88px, 1fr);
+  gap: 10px 12px;
+  align-items: center;
+  justify-content: stretch;
+  min-width: 820px;
+}
+
+.satListShell .headerRow {
+  justify-content: stretch;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.satListShell .satRow {
+  justify-content: stretch;
+}
+
+.satListShell .headerRow > *,
+.satListShell .satRow > * {
+  width: auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.satListShell .satIcon {
+  width: 36px;
+  justify-self: center;
+}
+
+.satListShell .satId {
+  min-width: 0;
+}
+
+.satListShell .divider {
+  width: 1px;
+  justify-self: center;
+}
+
+.satListShell .satName {
+  min-width: 0;
+  text-align: center;
+  justify-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.satListShell .hcellFmt,
+.satListShell .satFormatBadge {
+  justify-self: center;
+  width: auto;
+  min-width: 40px;
+  max-width: 52px;
+}
+
+.satListShell .hcell.w88,
+.satListShell .satCell.w88,
+.satListShell .hcell.w72,
+.satListShell .satCell.w72,
+.satListShell .hcell.w56,
+.satListShell .satCell.w56 {
+  justify-self: center;
+  min-width: 0;
+}
+
+.satListShell .hcellBat,
+.satListShell .satBatteryCell {
+  justify-self: center;
+  min-width: 0;
+}
+
+.satListShell .satRow * {
+  width: auto;
+  text-align: inherit;
+}
+
+@media (max-width: 600px) {
+  .satListShell {
+    border-radius: 24px;
+    padding: 12px;
+  }
+
+  .satListShell .headerRow,
+  .satListShell .satRow {
+    min-width: 760px;
+    grid-template-columns:
+      32px
+      minmax(52px, 64px)
+      1px
+      minmax(72px, 1fr)
+      minmax(36px, 48px)
+      minmax(72px, 88px)
+      minmax(48px, 60px)
+      minmax(52px, 64px)
+      minmax(80px, 1fr);
+    gap: 8px 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .satListShell .hcell {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .satListShell .satFormatBadge {
+    font-size: 12px;
+    padding: 3px 6px;
+    min-width: 34px;
+    max-width: 48px;
+  }
+
+  .satListShell .satCell strong {
+    font-size: 14px;
+  }
+
+  .satListShell .orbitPill {
+    font-size: 9px;
+    padding: 2px 7px;
+  }
+
+  .satListShell .satBatteryCell strong {
+    font-size: 14px;
+  }
 }
