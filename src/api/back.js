@@ -27,3 +27,13 @@ export async function createFenetre(payload) {
   const { data } = await api.post("/api/fenetres", payload);
   return data;
 }
+
+export async function fetchActiveMissions() {
+  const { data } = await api.get("/api/back/missions/actives");
+  return data;
+}
+
+export async function createParticipation(payload) {
+  const { data } = await api.post("/api/participations", payload);
+  return data;
+}

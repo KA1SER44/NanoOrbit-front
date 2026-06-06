@@ -48,9 +48,14 @@
   margin: 0 auto;
   width: 100%;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: var(--space-6);
 }
 
-.missionsPage .satShell.missionShell {
+.missionsPage .satShell.missionShell,
+.missionsPage .satShell.planShell {
   position: relative;
   top: auto;
   left: auto;
@@ -58,6 +63,9 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+}
+
+.missionsPage .satShell.missionShell {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
