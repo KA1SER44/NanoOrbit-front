@@ -10,6 +10,9 @@ import CommunicationsPage from "./pages/Communications";
 import MissionsPage from "./pages/Missions";
 import AlertesPage from "./pages/Alertes";
 import HistoriquePage from "./pages/Historique";
+import InstrumentsPage from "./pages/Instruments";
+import RoleProtectedRoute from "./components/RoleProtectedRoute";
+import { canManageInstruments } from "./utils/permissions";
 
 function App() {
   return (
@@ -41,6 +44,10 @@ function App() {
                 path="/historique"
                 element={<HistoriquePage />}
               />
+
+              <Route element={<RoleProtectedRoute canAccess={canManageInstruments} />}>
+                <Route path="/instruments" element={<InstrumentsPage />} />
+              </Route>
             </Route>
           </Route>
         </Routes>

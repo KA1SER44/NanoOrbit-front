@@ -2,6 +2,7 @@ const CAN_PLAN_COMMUNICATION_ROLES = new Set(["operateur", "admin"]);
 const CAN_UPDATE_SATELLITE_STATUT_ROLES = new Set(["operateur", "admin"]);
 const CAN_ASSIGN_PARTICIPATION_ROLES = new Set(["responsable", "admin"]);
 const CAN_DESORBITER_SATELLITE_ROLES = new Set(["admin"]);
+const CAN_MANAGE_INSTRUMENTS_ROLES = new Set(["operateur", "admin"]);
 
 export function canPlanCommunication(user) {
   return Boolean(user && CAN_PLAN_COMMUNICATION_ROLES.has(user.role));
@@ -17,4 +18,8 @@ export function canAssignParticipation(user) {
 
 export function canDesorbiterSatellite(user) {
   return Boolean(user && CAN_DESORBITER_SATELLITE_ROLES.has(user.role));
+}
+
+export function canManageInstruments(user) {
+  return Boolean(user && CAN_MANAGE_INSTRUMENTS_ROLES.has(user.role));
 }

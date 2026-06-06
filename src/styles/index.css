@@ -113,6 +113,18 @@ main {
   min-height: calc(100vh - var(--navbar-height));
 }
 
+@media (max-width: 1200px) {
+  main {
+    padding: 0 var(--space-6);
+  }
+}
+
+@media (max-width: 900px) {
+  main {
+    padding: 0 var(--space-4);
+  }
+}
+
 /* ── Scrollbar ────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }

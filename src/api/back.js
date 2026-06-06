@@ -45,3 +45,30 @@ export async function createParticipation(payload) {
   const { data } = await api.post("/api/participations", payload);
   return data;
 }
+
+export async function fetchSatelliteInstruments(idSatellite) {
+  const { data } = await api.get(
+    `/api/back/satellites/${encodeURIComponent(idSatellite)}/instruments`,
+  );
+  return data;
+}
+
+export async function createEmbarquement(payload) {
+  const { data } = await api.post("/api/embarquements", payload);
+  return data;
+}
+
+export async function deleteEmbarquement(idSatellite, idInstrument) {
+  const { data } = await api.delete(
+    `/api/embarquements/${encodeURIComponent(idSatellite)}/${encodeURIComponent(idInstrument)}`,
+  );
+  return data;
+}
+
+export async function updateEmbarquementEtat(idSatellite, idInstrument, etat) {
+  const { data } = await api.patch(
+    `/api/embarquements/${encodeURIComponent(idSatellite)}/${encodeURIComponent(idInstrument)}`,
+    { etat_fonctionnement: etat },
+  );
+  return data;
+}

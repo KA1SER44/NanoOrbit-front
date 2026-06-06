@@ -130,7 +130,7 @@ export default function DesorbiterSatelliteForm({ onDesorbited }) {
             Action destructive — une confirmation explicite est requise.
           </p>
         </div>
-        <span className="planRoleTag planRoleTagDanger">admin_nano uniquement</span>
+        <span className="planRoleTag planRoleTagDanger">admin</span>
       </header>
 
       {listLoading ? (
