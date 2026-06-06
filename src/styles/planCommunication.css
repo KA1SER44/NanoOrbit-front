@@ -68,6 +68,15 @@
   flex-shrink: 0;
 }
 
+.planForm .form-input {
+  width: 100%;
+}
+
+.planForm select.form-input {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
 .planFormGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

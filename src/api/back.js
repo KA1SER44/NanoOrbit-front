@@ -13,6 +13,14 @@ export async function updateSatelliteStatut(idSatellite, statut) {
   return data;
 }
 
+export async function desorbiterSatellite(idSatellite) {
+  const { data } = await api.post(
+    `/api/satellites/${encodeURIComponent(idSatellite)}/desorbiter`,
+    { confirm: true },
+  );
+  return data;
+}
+
 export async function fetchOperationalSatellites() {
   const { data } = await api.get("/api/back/satellites/operationnels");
   return data;

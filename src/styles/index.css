@@ -72,17 +72,37 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  background-color: var(--bg-base);
 }
 
 body {
-  background-image: url("/background.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  position: relative;
+  isolation: isolate;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.6;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bg-base);
+  background-image: url("/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+#root {
+  position: relative;
+  z-index: 0;
   min-height: 100vh;
 }
 
@@ -90,6 +110,7 @@ main {
   position: relative;
   top: var(--navbar-height);
   padding: 0 10rem;
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 /* ── Scrollbar ────────────────────────────────── */
