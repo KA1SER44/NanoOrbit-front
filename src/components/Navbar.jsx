@@ -30,6 +30,7 @@ export default function Navbar() {
         <NavLink to="/communications">Communications</NavLink>
         <NavLink to="/missions">Missions</NavLink>
         <NavLink to="/alertes">Alertes</NavLink>
+        <NavLink to="/historique">Historique</NavLink>
       </div>
 
       {user ? (

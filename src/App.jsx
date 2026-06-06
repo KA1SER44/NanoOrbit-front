@@ -9,6 +9,7 @@ import SatellitesPage from "./pages/Satellites";
 import CommunicationsPage from "./pages/Communications";
 import MissionsPage from "./pages/Missions";
 import AlertesPage from "./pages/Alertes";
+import HistoriquePage from "./pages/Historique";
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
               <Route
                 path="/alertes"
                 element={<AlertesPage />}
+              />
+
+              <Route
+                path="/historique"
+                element={<HistoriquePage />}
               />
             </Route>
           </Route>
