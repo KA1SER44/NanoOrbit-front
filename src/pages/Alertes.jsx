@@ -1,3 +1,9 @@
+import AlertesList from "../components/AlertesList";
+
 export default function AlertesPage() {
-  return <h1>Alertes Instruments</h1>;
+  return (
+    <div className="alertesPage">
+      <AlertesList />
+    </div>
+  );
 }

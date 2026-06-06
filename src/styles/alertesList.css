@@ -1,0 +1,264 @@
+.alerteHighlight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+}
+
+.alerteHighlightActive {
+  background: rgba(226, 75, 74, 0.12);
+  border-color: rgba(226, 75, 74, 0.4);
+}
+
+.alerteHighlightBadge {
+  font-family: "Space Mono", monospace;
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 36px;
+  text-align: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.75);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.alerteHighlightActive .alerteHighlightBadge {
+  background: rgba(226, 75, 74, 0.28);
+  color: #f09595;
+  border-color: rgba(226, 75, 74, 0.5);
+}
+
+.alerteHighlightText {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  text-transform: capitalize;
+}
+
+.alerteHighlightActive .alerteHighlightText {
+  color: #fff;
+}
+
+.alerteRowCritique {
+  background: rgba(226, 75, 74, 0.1);
+  border-color: rgba(226, 75, 74, 0.35);
+}
+
+.alerteRowCritique:hover {
+  background: rgba(226, 75, 74, 0.14);
+}
+
+.alertesPage {
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.alertesPage .satShell.alerteShell {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.alerteShell .headerRow,
+.alerteShell .alerteRow {
+  display: grid;
+  grid-template-columns:
+    36px
+    minmax(88px, 110px)
+    1px
+    minmax(100px, 1.2fr)
+    minmax(80px, 100px)
+    minmax(96px, 116px)
+    minmax(120px, 140px);
+  gap: 10px 12px;
+  align-items: center;
+  justify-content: stretch;
+  min-width: 820px;
+}
+
+.alerteShell .headerRow {
+  justify-content: stretch;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.alerteShell .alerteRow {
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.07);
+  border-radius: 50px;
+  padding: 12px 20px;
+  margin-bottom: 8px;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: default;
+}
+
+.alerteShell .alerteRow:last-child {
+  margin-bottom: 0;
+}
+
+.alerteShell .alerteRow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.alerteShell .headerRow > *,
+.alerteShell .alerteRow > * {
+  width: auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.alerteShell .satIcon {
+  width: 36px;
+  justify-self: center;
+  color: rgba(240, 149, 149, 0.85);
+}
+
+.alerteShell .satId {
+  min-width: 0;
+}
+
+.alerteShell .satName {
+  min-width: 0;
+  text-align: center;
+  justify-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alerteShell .hcellType,
+.alerteShell .alerteTypeCell,
+.alerteShell .hcellEtat,
+.alerteShell .alerteEtatCell,
+.alerteShell .hcellPriorite,
+.alerteShell .alertePrioriteCell {
+  justify-self: center;
+}
+
+.alerteTypeCell strong {
+  font-family: "Space Mono", monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.alerteEtat {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.alerteEtatDegrade {
+  background: rgba(239, 159, 39, 0.22);
+  color: #ef9f27;
+  border: 0.5px solid rgba(239, 159, 39, 0.4);
+}
+
+.alerteEtatHorsService {
+  background: rgba(226, 75, 74, 0.22);
+  color: #f09595;
+  border: 0.5px solid rgba(226, 75, 74, 0.4);
+}
+
+.alertePriorite {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.alertePrioriteCritique {
+  background: rgba(226, 75, 74, 0.3);
+  color: #ffb4b4;
+  border: 0.5px solid rgba(226, 75, 74, 0.55);
+  box-shadow: 0 0 12px rgba(226, 75, 74, 0.25);
+}
+
+.alertePrioriteSurveillance {
+  background: rgba(239, 159, 39, 0.28);
+  color: #fac775;
+  border: 0.5px solid rgba(239, 159, 39, 0.5);
+  box-shadow: 0 0 10px rgba(239, 159, 39, 0.18);
+}
+
+.alerteState {
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.alerteStateError {
+  color: #f09595;
+}
+
+@media (max-width: 600px) {
+  .alerteHighlight {
+    border-radius: 24px;
+    padding: 12px 16px;
+  }
+
+  .alerteShell {
+    border-radius: 24px;
+    padding: 12px;
+  }
+
+  .alerteShell .headerRow,
+  .alerteShell .alerteRow {
+    min-width: 820px;
+    grid-template-columns:
+      32px
+      minmax(76px, 96px)
+      1px
+      minmax(88px, 1fr)
+      minmax(68px, 84px)
+      minmax(84px, 100px)
+      minmax(108px, 124px);
+    gap: 8px 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .alerteShell .hcell {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .alertePriorite {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+
+  .alerteEtat {
+    font-size: 9px;
+    padding: 2px 7px;
+  }
+
+  .alerteTypeCell strong {
+    font-size: 12px;
+  }
+}

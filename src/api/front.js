@@ -14,3 +14,8 @@ export async function fetchMissions() {
   const { data } = await api.get("/api/missions");
   return data;
 }
+
+export async function fetchAlertes() {
+  const { data } = await api.get("/api/alertes");
+  return data;
+}
