@@ -1,0 +1,137 @@
+.satPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: var(--space-6);
+}
+
+.satPage .satShell.satListShell,
+.satPage .satShell.statutShell {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.statutShell {
+  margin-top: 0;
+}
+
+.statutSatList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-6);
+}
+
+.statutSatHeader,
+.statutSatRow {
+  display: grid;
+  grid-template-columns: minmax(88px, 120px) minmax(120px, 1fr) minmax(120px, 160px);
+  gap: 12px;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.statutSatHeader {
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.statutSatRow {
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.07);
+  border-radius: 24px;
+  padding: 10px 16px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.statutSatRow:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.statutSatRowSelected {
+  background: rgba(55, 138, 221, 0.1);
+  border-color: rgba(55, 138, 221, 0.35);
+}
+
+.statutSatId {
+  font-family: "Space Mono", monospace;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.statutSatNom {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statutBadge {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.statutBadgeOperationnel {
+  background: rgba(151, 196, 89, 0.22);
+  color: #97c459;
+  border: 0.5px solid rgba(151, 196, 89, 0.4);
+}
+
+.statutBadgeVeille {
+  background: rgba(239, 159, 39, 0.22);
+  color: #ef9f27;
+  border: 0.5px solid rgba(239, 159, 39, 0.4);
+}
+
+.statutBadgeDesorbite {
+  background: rgba(127, 119, 221, 0.22);
+  color: #afa9ec;
+  border: 0.5px solid rgba(127, 119, 221, 0.4);
+}
+
+.statutBadgeDefaillant {
+  background: rgba(226, 75, 74, 0.22);
+  color: #f09595;
+  border: 0.5px solid rgba(226, 75, 74, 0.4);
+}
+
+.statutForm {
+  padding-top: var(--space-5);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 700px) {
+  .statutSatHeader,
+  .statutSatRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    text-align: left;
+  }
+
+  .statutSatHeader span:not(:first-child) {
+    display: none;
+  }
+
+  .statutSatRow {
+    border-radius: 18px;
+  }
+}
