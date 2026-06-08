@@ -1,14 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   fetchAllSatellites,
   updateSatelliteStatut,
 } from "../api/back.js";
 import { useAuth } from "../context/AuthContext.jsx";
-import { canUpdateSatelliteStatut } from "../utils/permissions.js";
+import {
+  canDesorbiterSatellite,
+  canUpdateSatelliteStatut,
+} from "../utils/permissions.js";
 import "../styles/planCommunication.css";
 import "../styles/satelliteStatut.css";
 
-const STATUT_OPTIONS = ["Opérationnel", "En veille", "Désorbité"];
+const ALL_STATUT_OPTIONS = ["Opérationnel", "En veille", "Désorbité"];
 
 function getStatutBadgeClass(statut) {
   const value = String(statut ?? "").toLowerCase();
@@ -38,6 +41,14 @@ function StatutBadge({ statut }) {
 
 export default function UpdateSatelliteStatutForm({ onUpdated }) {
   const { user, loading: authLoading } = useAuth();
+  const canDesorbiter = canDesorbiterSatellite(user);
+  const statutOptions = useMemo(
+    () =>
+      canDesorbiter
+        ? ALL_STATUT_OPTIONS
+        : ALL_STATUT_OPTIONS.filter((option) => option !== "Désorbité"),
+    [canDesorbiter],
+  );
 
   const [satellites, setSatellites] = useState([]);
   const [listLoading, setListLoading] = useState(true);
@@ -46,7 +57,7 @@ export default function UpdateSatelliteStatutForm({ onUpdated }) {
   const [feedback, setFeedback] = useState(null);
 
   const [idSatellite, setIdSatellite] = useState("");
-  const [statut, setStatut] = useState(STATUT_OPTIONS[0]);
+  const [statut, setStatut] = useState(ALL_STATUT_OPTIONS[0]);
 
   const loadSatellites = useCallback(async () => {
     setListLoading(true);
@@ -80,10 +91,12 @@ export default function UpdateSatelliteStatutForm({ onUpdated }) {
     if (!selected) return;
 
     const current = selected.statut;
-    if (STATUT_OPTIONS.includes(current)) {
+    if (statutOptions.includes(current)) {
       setStatut(current);
+    } else {
+      setStatut(statutOptions[0]);
     }
-  }, [idSatellite, satellites]);
+  }, [idSatellite, satellites, statutOptions]);
 
   if (authLoading || !canUpdateSatelliteStatut(user)) {
     return null;
@@ -92,6 +105,15 @@ export default function UpdateSatelliteStatutForm({ onUpdated }) {
   async function handleSubmit(event) {
     event.preventDefault();
     setFeedback(null);
+
+    if (statut === "Désorbité" && !canDesorbiter) {
+      setFeedback({
+        type: "error",
+        message: "Seul l'administrateur peut désorbiter un satellite.",
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -128,7 +150,8 @@ export default function UpdateSatelliteStatutForm({ onUpdated }) {
           <span className="page-label">BO-01</span>
           <h2 id="statut-sat-title">Modifier le statut d&apos;un satellite</h2>
           <p className="planSubtitle">
-            Liste tous les satellites et permet de changer leur statut.
+            Liste tous les satellites et permet de changer leur statut. La
+            désorbitation est réservée à l&apos;administrateur.
           </p>
         </div>
         <span className="planRoleTag">operateur · admin</span>
@@ -209,7 +232,7 @@ export default function UpdateSatelliteStatutForm({ onUpdated }) {
                   required
                   disabled={submitting}
                 >
-                  {STATUT_OPTIONS.map((option) => (
+                  {statutOptions.map((option) => (
                     <option key={option} value={option}>
                       {option}
                     </option>
