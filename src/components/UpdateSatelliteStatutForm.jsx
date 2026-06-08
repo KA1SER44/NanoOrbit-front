@@ -8,7 +8,7 @@ import { canUpdateSatelliteStatut } from "../utils/permissions.js";
 import "../styles/planCommunication.css";
 import "../styles/satelliteStatut.css";
 
-const STATUT_OPTIONS = ["Opérationnel", "En veille"];
+const STATUT_OPTIONS = ["Opérationnel", "En veille", "Désorbité"];
 
 function getStatutBadgeClass(statut) {
   const value = String(statut ?? "").toLowerCase();
